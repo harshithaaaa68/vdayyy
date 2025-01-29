@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>will you be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: pink;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: red;
+            margin-top: 30px;
+            font-size: 2.5em;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        img {
+            width: 250px;
+            border-radius: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            position: absolute;
+        }
+        .yes {
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            position: relative;
+        }
+        .no {
+            background-color: red;
+            color: white;
+            border: 2px solid red;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://files.catbox.moe/flq6d3.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Valentine's Message -->
+    <h1>Hey kennieboo, Will You Be My Valentine? ❤️</h1>
+
+    <div class="container">
+        <!-- Cute Image -->
+        <img src="https://ih1.redbubble.net/image.3507724389.3766/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg" alt="Cute Love GIF">
+
+        <div class="buttons">
+            <button class="yes" onclick="yesClicked()">Yes</button>
+            <button class="no" onmouseover="moveButton(this)" id="noButton">No</button>
+        </div>
+
+        <!-- Hidden Surprise Message -->
+        <h2 id="surpriseMessage" class="hidden">Yay! I loveee youu soo muchh 🥺❤🌏💕 ♾🐣🧸💋🧿🐻‍❄🎀🍼</h2>
+    </div>
+
+    <script>
+        let music = document.getElementById("backgroundMusic");
+
+        // Function to play music on any interaction
+        function playMusic() {
+            music.volume = 0.5; // Adjust volume if needed
+            music.play().catch(error => console.log("Autoplay blocked:", error));
+        }
+
+        // Try to play music as soon as possible
+        document.addEventListener("DOMContentLoaded", playMusic);
+        document.addEventListener("click", playMusic);
+        document.addEventListener("mouseover", playMusic);
+        document.addEventListener("touchstart", playMusic);
+
+        function yesClicked() {
+            document.getElementById("surpriseMessage").classList.remove("hidden");
+        }
+
+        function moveButton(button) {
+            let x = Math.random() * (window.innerWidth - button.clientWidth);
+            let y = Math.random() * (window.innerHeight - button.clientHeight);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+
+            // Create a new "Yes" button to cover the "No" button
+            let newYesButton = document.createElement("button");
+            newYesButton.classList.add("yes");
+            newYesButton.innerText = "Yes";
+            newYesButton.style.position = "absolute";
+            newYesButton.style.left = `${Math.random() * window.innerWidth}px`;
+            newYesButton.style.top = `${Math.random() * window.innerHeight}px`;
+            newYesButton.onclick = yesClicked;
+            document.body.appendChild(newYesButton);
+        }
+    </script>
+</body>
+</html>
